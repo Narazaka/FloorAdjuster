@@ -7,5 +7,7 @@ namespace Narazaka.VRChat.FloorAdjuster
     {
         [SerializeField]
         public float Height;
+        [SerializeField]
+        public Transform Hips;
     }
 }

@@ -10,10 +10,8 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
     {
         public override string QualifiedName => "net.narazaka.vrchat.floor_adjuster";
 
-        /// <summary>
-        /// The plugin name shown in debug UIs. If not set, the qualified name will be shown.
-        /// </summary>
         public override string DisplayName => nameof(FloorAdjuster);
+
         protected override void Configure()
         {
             InPhase(BuildPhase.Transforming).AfterPlugin("nadena.dev.modular-avatar").Run(nameof(FloorAdjuster), ctx =>
@@ -33,7 +31,7 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
         void AdjustArmature(FloorAdjuster floorAdjuster)
         {
             var armature = floorAdjuster.transform;
-            var hips = armature.Find("Hips");
+            var hips = floorAdjuster.Hips;
             var armaturePosition = armature.position;
             var hipsPosition = hips.position;
             var armatureScale = 1 + floorAdjuster.Height / (hipsPosition.y - armaturePosition.y);

@@ -37,10 +37,8 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
             var armaturePosition = armature.position;
             var hipsPosition = hips.position;
             var armatureScale = 1 + floorAdjuster.Height / (hipsPosition.y - armaturePosition.y);
-            var scaledZdiff = (hipsPosition.z - armaturePosition.z) * (armatureScale - 1);
             armature.localScale = Vector3.one * armatureScale;
             hips.localScale = Vector3.one / armatureScale;
-            armature.position -= scaledZdiff * Vector3.forward;
         }
     }
 }

@@ -1,0 +1,16 @@
+{
+  "name": "net.narazaka.vrchat.floor-adjuster",
+  "version": "0.1.0",
+  "displayName": "Floor Adjuster",
+  "description": "足を床にあわせるツール",
+  "author": {
+    "name": "Narazaka",
+    "url": "https://github.com/Narazaka"
+  },
+  "license": "Zlib",
+  "type": "tool",
+  "url" : "https://github.com/Narazaka/FloorAdjuster.git",
+  "vpmDependencies": {
+    "nadena.dev.modular-avatar": ">=1.8.0"
+  }
+}

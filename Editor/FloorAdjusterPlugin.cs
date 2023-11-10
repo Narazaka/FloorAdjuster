@@ -19,24 +19,26 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
                 var floorAdjuster = ctx.AvatarRootObject.GetComponentInChildren<FloorAdjuster>();
                 if (floorAdjuster == null) return;
 
-                AdjustArmature(floorAdjuster);
-
                 var descriptor = ctx.AvatarRootObject.GetComponentInChildren<VRCAvatarDescriptor>();
                 descriptor.ViewPosition += Vector3.up * floorAdjuster.Height;
+
+                AdjustArmature(floorAdjuster, descriptor);
 
                 UnityEngine.Object.DestroyImmediate(floorAdjuster);
             });
         }
 
-        void AdjustArmature(FloorAdjuster floorAdjuster)
+        void AdjustArmature(FloorAdjuster floorAdjuster, VRCAvatarDescriptor descriptor)
         {
             var armature = floorAdjuster.transform;
             var hips = floorAdjuster.Hips;
             var armaturePosition = armature.position;
             var hipsPosition = hips.position;
             var armatureScale = 1 + floorAdjuster.Height / (hipsPosition.y - armaturePosition.y);
+            var zDiff = (hipsPosition.z - armaturePosition.z) * (armatureScale - 1);
             armature.localScale = Vector3.one * armatureScale;
             hips.localScale = Vector3.one / armatureScale;
+            descriptor.ViewPosition += Vector3.forward * zDiff;
         }
     }
 }

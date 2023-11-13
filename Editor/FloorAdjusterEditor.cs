@@ -35,7 +35,9 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
         {
             using (var change = new EditorGUI.ChangeCheckScope())
             {
-                var point = FloorAdjuster.transform.parent.position + Vector3.down * FloorAdjuster.Height;
+                var parent = FloorAdjuster.transform.parent;
+                if (parent == null) return;
+                var point = parent.position + Vector3.down * FloorAdjuster.Height;
                 Handles.DrawSolidRectangleWithOutline(new Vector3[] { point + new Vector3(0.5f, 0, 0.5f), point + new Vector3(0.5f, 0, -0.5f), point + new Vector3(-0.5f, 0, -0.5f), point + new Vector3(-0.5f, 0, 0.5f) }, new Color(0.5f, 0.5f, 0.5f, 0.1f), Color.white);
                 var newHeight = -Handles.Slider(point, Vector3.up).y;
                 if (change.changed)

@@ -2,7 +2,6 @@
     "name": "FloorAdjuster.Editor",
     "references": [
         "GUID:62ced99b048af7f4d8dfe4bed8373d76",
-        "GUID:fc900867c0f47cd49b6e2ae4ef907300",
         "GUID:83244d0e5c1cd494b8052dd4f01d7fd5"
     ],
     "includePlatforms": [

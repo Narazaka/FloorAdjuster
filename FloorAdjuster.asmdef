@@ -1,8 +1,7 @@
 {
     "name": "FloorAdjuster",
     "references": [
-        "GUID:fe747755f7b44e048820525b07f9b956",
-        "GUID:fc900867c0f47cd49b6e2ae4ef907300"
+        "GUID:fe747755f7b44e048820525b07f9b956"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

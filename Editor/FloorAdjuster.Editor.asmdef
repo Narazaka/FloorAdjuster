@@ -2,7 +2,8 @@
     "name": "FloorAdjuster.Editor",
     "references": [
         "nadena.dev.ndmf",
-        "FloorAdjuster"
+        "FloorAdjuster",
+        "VRC.SDKBase"
     ],
     "includePlatforms": [
         "Editor"

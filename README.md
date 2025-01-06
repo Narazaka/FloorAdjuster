@@ -37,6 +37,9 @@ https://github.com/Narazaka/FloorAdjuster/releases/latest から `net.narazaka.v
 
 ## 更新履歴
 
+- 1.0.5
+  - VCCインストーラーを追加
+  - changelogUrlをマニフェストに追加
 - 1.0.4
   - VCCでのUnity 2022プロジェクトへのインストールでUnityバージョン警告がでないように
 - 1.0.3

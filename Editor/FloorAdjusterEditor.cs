@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using VRC.SDK3.Avatars.Components;
 
@@ -37,25 +35,21 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
             serializedObject.ApplyModifiedProperties();
             if (Hips.objectReferenceValue == null)
             {
-                EditorGUILayout.HelpBox("Hips が設定されていません。Hips を設定してください。", MessageType.Error);
+                EditorGUILayout.HelpBox(T.WarnHips, MessageType.Error);
             }
             if (!MaybeArmature())
             {
-                EditorGUILayout.HelpBox("アバターのArmatureに付いていますか？", MessageType.Warning);
+                EditorGUILayout.HelpBox(T.WarnArmature, MessageType.Warning);
             }
-            var floorAdjusters = Util.FindFloorAdjusters(FloorAdjuster.transform.GetComponentInParent<VRCAvatarDescriptor>().transform);
-            if (floorAdjusters.Count > 1)
-            {
-                EditorGUILayout.HelpBox("Floor Adjuster が複数あります。1つにまとめてください。", MessageType.Error);
-                if (GUILayout.Button("他の Floor Adjuster を削除する"))
-                {
-                    Util.DestroyOtherFloorAdjusters(FloorAdjuster, floorAdjusters);
-                }
-            }
-            if (GUILayout.Button("新しい方式(by skeleton)に変換する"))
+            Util.ExtraFloorAdjusterGUI(FloorAdjuster);
+            if (GUILayout.Button(T.ConvertToNewMethod))
             {
                 ConvertToSkeletalFloorAdjuster();
             }
+
+#if HAS_NDMF_LOCALIZATION
+            nadena.dev.ndmf.ui.LanguageSwitcher.DrawImmediate();
+#endif
         }
 
         void OnSceneGUI()
@@ -85,11 +79,19 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
             var avatarRoot = FloorAdjuster.transform.GetComponentInParent<VRCAvatarDescriptor>();
             if (avatarRoot == null)
             {
-                Debug.LogError("FloorAdjuster を SkeletalFloorAdjuster に変換するには、VRCAvatarDescriptor が必要です。");
+                Debug.LogError(T.NeedsAvatarDescriptor);
                 return;
             }
             Util.CreateSkeletalFloorAdjuster(avatarRoot.transform, -Height.floatValue);
             Undo.DestroyObjectImmediate(FloorAdjuster);
+        }
+
+        class T
+        {
+            public static istring WarnHips => new istring("Hips is not set. Please set Hips.", "Hips が設定されていません。Hips を設定してください。");
+            public static istring WarnArmature => new istring("Is this attached to the Armature of the avatar?", "アバターの Armature に付いていますか？");
+            public static istring ConvertToNewMethod => new istring("Convert to new method (by skeleton)", "新しい方式(by skeleton)に変換する");
+            public static istring NeedsAvatarDescriptor => new istring("To convert FloorAdjuster to SkeletalFloorAdjuster, a VRCAvatarDescriptor is required.", "FloorAdjuster を SkeletalFloorAdjuster に変換するには、VRCAvatarDescriptor が必要です。");
         }
     }
 }

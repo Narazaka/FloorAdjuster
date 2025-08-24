@@ -1,5 +1,6 @@
 {
     "name": "FloorAdjuster.Editor",
+    "rootNamespace": "",
     "references": [
         "nadena.dev.ndmf",
         "FloorAdjuster",
@@ -14,6 +15,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "nadena.dev.ndmf",
+            "expression": "1.3.0",
+            "define": "HAS_NDMF_LOCALIZATION"
+        }
+    ],
     "noEngineReferences": false
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using VRC.SDK3.Avatars.Components;
 
@@ -26,18 +24,19 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
 
         public override void OnInspectorGUI()
         {
-            EditorGUILayout.HelpBox("このオブジェクトの高さが床の高さになります", MessageType.Info);
+            EditorGUILayout.HelpBox(T.Help, MessageType.Info);
 
             var skeletalFloorAdjuster = target as SkeletalFloorAdjuster;
-            var floorAdjusters = Util.FindFloorAdjusters(skeletalFloorAdjuster.transform.GetComponentInParent<VRCAvatarDescriptor>().transform);
-            if (floorAdjusters.Count > 1)
-            {
-                EditorGUILayout.HelpBox("Floor Adjuster が複数あります。1つにまとめてください。", MessageType.Error);
-                if (GUILayout.Button("他の Floor Adjuster を削除する"))
-                {
-                    Util.DestroyOtherFloorAdjusters(skeletalFloorAdjuster, floorAdjusters);
-                }
-            }
+            Util.ExtraFloorAdjusterGUI(skeletalFloorAdjuster);
+
+#if HAS_NDMF_LOCALIZATION
+            nadena.dev.ndmf.ui.LanguageSwitcher.DrawImmediate();
+#endif
+        }
+
+        class T
+        {
+            public static istring Help => new istring("This object's height will be the floor height", "このオブジェクトの高さが床の高さになります");
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
             });
         }
 
-        private void RunFloorAdjuster(BuildContext ctx, FloorAdjuster floorAdjuster)
+        void RunFloorAdjuster(BuildContext ctx, FloorAdjuster floorAdjuster)
         {
             var descriptor = ctx.AvatarRootObject.GetComponentInChildren<VRCAvatarDescriptor>();
             descriptor.ViewPosition += Vector3.up * floorAdjuster.Height;
@@ -51,7 +51,7 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
         }
 
 
-        private static void RunSkeletalFloorAdjuster(BuildContext ctx, SkeletalFloorAdjuster skeletalFloorAdjuster)
+        static void RunSkeletalFloorAdjuster(BuildContext ctx, SkeletalFloorAdjuster skeletalFloorAdjuster)
         {
             var descriptor = ctx.AvatarRootObject.GetComponentInChildren<VRCAvatarDescriptor>();
             var animator = ctx.AvatarRootObject.GetComponent<Animator>();
@@ -60,14 +60,14 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
 
 
             var adjustAvatar = UnityEngine.Object.Instantiate(animator.avatar);
-            var sAdjustTargetAvatar = new SerializedObject(adjustAvatar);//AvatarBuilder から作り直す実装もしてみたけど、うまくできる方法が全く分からなかった。
+            var sAdjustTargetAvatar = new SerializedObject(adjustAvatar); // AvatarBuilder から作り直す実装もしてみたけど、うまくできる方法が全く分からなかった。
 
-            //アバターのルートモーションの大きさを変えることで Humanoid としての初期位置を変えることで高さが変わる。
+            // アバターのルートモーションの大きさを変えることで Humanoid としての初期位置を変えることで高さが変わる。
             var avatarScale = sAdjustTargetAvatar.FindProperty("m_Avatar.m_Human.data.m_Scale");
             avatarScale.floatValue += floorDiff;
 
-            //ビューポジションも IKPose か TPose の影響を受けるのでその影響の時のために補正。
-            //IKPose も TPose もデフォルトの物であれば真上にしかルート移動が存在しないの Y 軸のみの補正で問題がない。
+            // ビューポジションも IKPose か TPose の影響を受けるのでその影響の時のために補正。
+            // IKPose も TPose もデフォルトの物であれば真上にしかルート移動が存在しないの Y 軸のみの補正で問題がない。
             descriptor.ViewPosition += Vector3.up * floorDiff;
 
 

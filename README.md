@@ -23,13 +23,23 @@ https://github.com/Narazaka/FloorAdjuster/releases/latest から `net.narazaka.v
 
 ## 使い方
 
-1. アバターのArmatureのオブジェクトを選択し、「Add Component」から「Floor Adjuster」を選んで付けます。
+1. アバターを右クリックしたメニューから「Setup FloorAdjuster」を実行します。
 
-2. 地面高さを設定します。
+2. 「FloorAdjuster」オブジェクトができるので、上下に移動して地面高さを設定します。
 
 3. アップロードするとたぶん上下位置が動いてるはず
 
-## 注意
+### 旧方式から新方式への変換
+
+「新しい方式(by skeleton)に変換する」ボタンを押せば新方式にできます。
+
+## 変換の方法
+
+### 新方式（by skeleton）
+
+UnityのHumanoidのデータを弄ることによって上下位置を無理矢理移動しています。
+
+### 旧方式（by scale）
 
 アバターのArmatureのスケールを調整してHipsボーンを移動させる＆Hipsボーンにスケールの逆数をかけることで大きさを保つ手法をとっています。
 

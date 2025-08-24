@@ -23,9 +23,19 @@ https://github.com/Narazaka/FloorAdjuster/releases/latest から `net.narazaka.v
 
 ## 使い方
 
+### 新方式セットアップ
+
 1. アバターを右クリックしたメニューから「Setup FloorAdjuster」を実行します。
 
 2. 「FloorAdjuster」オブジェクトができるので、上下に移動して地面高さを設定します。
+
+3. アップロードするとたぶん上下位置が動いてるはず
+
+### 旧方式セットアップ
+
+1. アバターのArmatureのオブジェクトを選択し、「Add Component」から「Floor Adjuster (by scale)」を選んで付けます。
+
+2. 地面高さを設定します。
 
 3. アップロードするとたぶん上下位置が動いてるはず
 

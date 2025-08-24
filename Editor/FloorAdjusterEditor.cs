@@ -35,9 +35,26 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
                 Hips.objectReferenceValue = FloorAdjuster.transform.Find("Hips");
             }
             serializedObject.ApplyModifiedProperties();
+            if (Hips.objectReferenceValue == null)
+            {
+                EditorGUILayout.HelpBox("Hips が設定されていません。Hips を設定してください。", MessageType.Error);
+            }
             if (!MaybeArmature())
             {
                 EditorGUILayout.HelpBox("アバターのArmatureに付いていますか？", MessageType.Warning);
+            }
+            var floorAdjusters = Util.FindFloorAdjusters(FloorAdjuster.transform.GetComponentInParent<VRCAvatarDescriptor>().transform);
+            if (floorAdjusters.Count > 1)
+            {
+                EditorGUILayout.HelpBox("Floor Adjuster が複数あります。1つにまとめてください。", MessageType.Error);
+                if (GUILayout.Button("他の Floor Adjuster を削除する"))
+                {
+                    Util.DestroyOtherFloorAdjusters(FloorAdjuster, floorAdjusters);
+                }
+            }
+            if (GUILayout.Button("新しい方式(by skeleton)に変換する"))
+            {
+                ConvertToSkeletalFloorAdjuster();
             }
         }
 
@@ -61,6 +78,18 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
         bool MaybeArmature()
         {
             return ArmatureParent != null && (ArmatureParent.GetComponent<Animator>() != null || ArmatureParent.GetComponent<VRCAvatarDescriptor>() != null);
+        }
+
+        void ConvertToSkeletalFloorAdjuster()
+        {
+            var avatarRoot = FloorAdjuster.transform.GetComponentInParent<VRCAvatarDescriptor>();
+            if (avatarRoot == null)
+            {
+                Debug.LogError("FloorAdjuster を SkeletalFloorAdjuster に変換するには、VRCAvatarDescriptor が必要です。");
+                return;
+            }
+            Util.CreateSkeletalFloorAdjuster(avatarRoot.transform, -Height.floatValue);
+            Undo.DestroyObjectImmediate(FloorAdjuster);
         }
     }
 }

@@ -56,7 +56,7 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
             var descriptor = ctx.AvatarRootObject.GetComponentInChildren<VRCAvatarDescriptor>();
             var animator = ctx.AvatarRootObject.GetComponent<Animator>();
 
-            var floorDiff = -1 * skeletalFloorAdjuster.transform.position.y;
+            var floorDiff = -1 * (skeletalFloorAdjuster.transform.position.y - descriptor.transform.position.y);
 
 
             var adjustAvatar = UnityEngine.Object.Instantiate(animator.avatar);

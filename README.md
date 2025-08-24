@@ -23,7 +23,7 @@ https://github.com/Narazaka/FloorAdjuster/releases/latest から `net.narazaka.v
 
 ## 使い方
 
-### 新方式セットアップ
+### by skeleton（新方式）セットアップ
 
 1. アバターを右クリックしたメニューから「Setup FloorAdjuster」を実行します。
 
@@ -31,7 +31,7 @@ https://github.com/Narazaka/FloorAdjuster/releases/latest から `net.narazaka.v
 
 3. アップロードするとたぶん上下位置が動いてるはず
 
-### 旧方式セットアップ
+### by scale（旧方式）セットアップ
 
 1. アバターのArmatureのオブジェクトを選択し、「Add Component」から「Floor Adjuster (by scale)」を選んで付けます。
 

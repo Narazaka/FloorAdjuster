@@ -33,6 +33,7 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
                 Hips.objectReferenceValue = FloorAdjuster.transform.Find("Hips");
             }
             serializedObject.ApplyModifiedProperties();
+            EditorGUILayout.HelpBox(T.Desc, MessageType.Info);
             if (Hips.objectReferenceValue == null)
             {
                 EditorGUILayout.HelpBox(T.WarnHips, MessageType.Error);
@@ -88,6 +89,7 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
 
         class T
         {
+            public static istring Desc => new istring("Adjust the floor height using the white arrow in the scene (please turn on the Gizmo).", "シーン上の白い矢印で床の高さを調整します（Gizmoをオンにしてください）");
             public static istring WarnHips => new istring("Hips is not set. Please set Hips.", "Hips が設定されていません。Hips を設定してください。");
             public static istring WarnArmature => new istring("Is this attached to the Armature of the avatar?", "アバターの Armature に付いていますか？");
             public static istring ConvertToNewMethod => new istring("Convert to new method (by skeleton)", "新しい方式(by skeleton)に変換する");

@@ -56,6 +56,11 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
             var descriptor = ctx.AvatarRootObject.GetComponentInChildren<VRCAvatarDescriptor>();
             var animator = ctx.AvatarRootObject.GetComponent<Animator>();
 
+            var scaleY = skeletalFloorAdjuster.transform.lossyScale.y;
+            if (scaleY == 0)
+            {
+                throw new InvalidOperationException("SkeletalFloorAdjuster has zero scale on Y axis, cannot adjust floor.");
+            }
             var floorDiff = -1 * (skeletalFloorAdjuster.transform.position.y - descriptor.transform.position.y);
 
 
@@ -64,7 +69,7 @@ namespace Narazaka.VRChat.FloorAdjuster.Editor
 
             // アバターのルートモーションの大きさを変えることで Humanoid としての初期位置を変えることで高さが変わる。
             var avatarScale = sAdjustTargetAvatar.FindProperty("m_Avatar.m_Human.data.m_Scale");
-            avatarScale.floatValue += floorDiff;
+            avatarScale.floatValue += floorDiff / scaleY;
 
             // ビューポジションも IKPose か TPose の影響を受けるのでその影響の時のために補正。
             // IKPose も TPose もデフォルトの物であれば真上にしかルート移動が存在しないの Y 軸のみの補正で問題がない。
